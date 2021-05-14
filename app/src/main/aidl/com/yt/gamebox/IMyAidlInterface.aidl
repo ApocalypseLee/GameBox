@@ -1,5 +1,5 @@
 // IMyAidlInterface.aidl
-package com.yt.apps;
+package com.yt.gamebox;
 
 // Declare any non-default types here with import statements
 
