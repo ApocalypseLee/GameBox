@@ -6,11 +6,9 @@ import android.app.ActivityManager.RunningAppProcessInfo
 import android.app.usage.UsageStats
 import android.app.usage.UsageStatsManager
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Environment
-import android.provider.Settings
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast

@@ -4,14 +4,11 @@ import android.animation.TypeEvaluator
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Build
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import java.math.BigDecimal
 import java.math.BigInteger
 import java.text.DecimalFormat
-import java.util.*
 
 /**
  * Created by Administrator on 2019/7/30 0030.
