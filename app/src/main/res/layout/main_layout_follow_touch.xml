@@ -12,7 +12,7 @@
 <!--        android:textColor="#FFF"-->
 <!--        android:textSize="14sp" />-->
 
-    <com.yt.apps.Widgets.BubbleView
+    <com.yt.gamebox.Widgets.BubbleView
         android:id="@+id/bubble_view"
         android:layout_width="100dp"
         android:layout_height="100dp"

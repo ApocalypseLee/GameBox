@@ -14,7 +14,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.yt.apps"
+        applicationId "com.yt.gamebox"
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
@@ -56,9 +56,6 @@ dependencies {
     implementation 'androidx.annotation:annotation:1.2.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     implementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     implementation 'org.greenrobot:eventbus:3.1.1'
