@@ -121,10 +121,8 @@ class FullscreenActivity : AppCompatActivity() {
         initTask()
         initContent()
 
-        checkFWPermission()
-//        val intent = Intent(this, SplashActivity::class.java)
-//        startActivityForResult(intent, 1)
-        initFloatBubble()
+        val intent = Intent(this, SplashActivity::class.java)
+        startActivityForResult(intent, 1)
 
         run = true
         memHandler.postDelayed(task, 1000)
@@ -227,6 +225,7 @@ class FullscreenActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode > 0) {
             checkFWPermission()
+            initFloatBubble()
         }
     }
 

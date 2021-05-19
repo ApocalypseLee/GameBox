@@ -1,22 +1,37 @@
 package com.yt.gamebox
 
 import android.content.Intent
+import android.os.Bundle
+import android.os.CountDownTimer
 import android.os.Handler
-import android.util.Log
+import android.os.PersistableBundle
 import android.view.KeyEvent
-import android.view.MotionEvent
+import android.view.Window
+import androidx.appcompat.app.AppCompatActivity
 
-class SplashActivity : BaseAlarmActivity() {
+class SplashActivity : AppCompatActivity() {
 
     private val TAG = SplashActivity::class.java.simpleName
     var clicked = false
     var paused: Boolean = false
+    private val AD_TIME_OUT = 3500L
 
     private var mStartedCount = 0
     private val handler = Handler()
+    private val countDownTimer: CountDownTimer =
+        object : CountDownTimer(AD_TIME_OUT, 500) {
+            override fun onTick(millisUntilFinished: Long) {}
+            override fun onFinish() {
+                toNextActivity()
+            }
+        }
 
-    override fun onInit() {
 
+    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+        super.onCreate(savedInstanceState, persistentState)
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
+        setContentView(R.layout.activity_splash)
+        countDownTimer.start()
     }
 
     override fun onStart() {
@@ -37,26 +52,11 @@ class SplashActivity : BaseAlarmActivity() {
         }
     }
 
-    override fun initNewIntent(intent: Intent?) {
-
+    override fun onDestroy() {
+        super.onDestroy()
+        countDownTimer.cancel()
     }
 
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        Log.d(TAG, "onADClicked")
-        showTip("广告被点击")
-        clicked = true
-        toNextActivity()
-
-        /**
-         * 针对点击不跳转的广告，需要设置一个定时任务执行跳转
-         */
-        handler.postDelayed({
-            if (!paused) {
-                toNextActivity()
-            }
-        }, 200)
-        return true
-    }
 
     /**
      * 开屏页一定要禁止用户对返回按钮的控制，
@@ -73,7 +73,7 @@ class SplashActivity : BaseAlarmActivity() {
      *
      * @return
      */
-    override fun needStatistics(isOnStartCall: Boolean): Boolean {
+    fun needStatistics(isOnStartCall: Boolean): Boolean {
         return if (isOnStartCall) mStartedCount < 1 else mStartedCount < 2
     }
 
