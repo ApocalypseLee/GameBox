@@ -76,6 +76,7 @@
             android:launchMode="singleInstance"
             android:taskAffinity=""
             android:theme="@android:style/Theme.Wallpaper.NoTitleBar" /> <!-- 开屏广告 -->
+
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
