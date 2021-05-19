@@ -24,7 +24,8 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 防止进程被杀的电量优化白名单 -->
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" /> <!-- 如果接入了视频相关的广告, 请务必添加否则黑屏 -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.FORCE_STOP_PACKAGES"
+    <uses-permission
+        android:name="android.permission.FORCE_STOP_PACKAGES"
         tools:ignore="ProtectedPermissions" />
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
@@ -60,8 +61,7 @@
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.MyApplication.Fullscreen">
-        </activity>
+            android:theme="@style/Theme.MyApplication.Fullscreen"></activity>
 
         <!-- 自定义熄屏弹出通知窗口 -->
         <activity
@@ -79,7 +79,15 @@
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" /> <!-- 自定义熄屏弹出通知窗口的弹出控制服务 -->
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+
+        <activity
+            android:name=".WebViewActivity"
+            android:configChanges="keyboard|orientation|screenSize"
+            android:exported="true"
+            android:launchMode="standard"/>
+
+        <!-- 自定义熄屏弹出通知窗口的弹出控制服务 -->
         <service
             android:name=".Services.RegisterServService"
             android:enabled="true"

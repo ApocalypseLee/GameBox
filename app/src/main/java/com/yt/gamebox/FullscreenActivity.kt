@@ -27,10 +27,13 @@ import org.greenrobot.eventbus.ThreadMode
  * status bar and navigation/system bar) with user interaction.
  */
 class FullscreenActivity : AppCompatActivity() {
-    private lateinit var fullscreenContent: ListView
+    private lateinit var game_list: ListView
     private val hideHandler = Handler()
     private lateinit var detailAdapter: DetailAdapter
     private lateinit var mActivity: FullscreenActivity
+    private lateinit var pinballBG: ImageView
+    private lateinit var pingusBG: ImageView
+    private lateinit var expressBG: ImageView
     private var run = false
 
     companion object {
@@ -60,7 +63,7 @@ class FullscreenActivity : AppCompatActivity() {
         // Note that some of these constants are new as of API 16 (Jelly Bean)
         // and API 19 (KitKat). It is safe to use them, as they are inlined
         // at compile-time and do nothing on earlier devices.
-        fullscreenContent.systemUiVisibility =
+        game_list.systemUiVisibility =
             View.SYSTEM_UI_FLAG_LOW_PROFILE or
                     View.SYSTEM_UI_FLAG_FULLSCREEN or
                     View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
@@ -119,11 +122,42 @@ class FullscreenActivity : AppCompatActivity() {
         isFullscreen = true
 
         // Set up the user interaction to manually show or hide the system UI.
-        fullscreenContent = findViewById(R.id.fullscreen_content)
-        fullscreenContent.setOnScrollListener(scrollListener)
+        pinballBG = findViewById(R.id.pinball_bg)
+        pinballBG.setOnClickListener {
+            gotoGamePage(0)
+        }
+        pingusBG = findViewById(R.id.pingus_bg)
+        pingusBG.setOnClickListener {
+            gotoGamePage(1)
+        }
+        expressBG = findViewById(R.id.express_bg)
+        expressBG.setOnClickListener {
+            gotoGamePage(2)
+        }
+        game_list = findViewById(R.id.game_list)
+        game_list.setOnScrollListener(scrollListener)
         detailAdapter = DetailAdapter(this, applicationContext)
         detailAdapter.setContent()
-        fullscreenContent.adapter = detailAdapter
+        game_list.adapter = detailAdapter
+    }
+
+    fun gotoGamePage(position: Int) {
+        val intent = Intent(this, WebViewActivity::class.java)
+        when (position) {
+            0 -> {
+                intent.putExtra("title", "砰砰弹力球")
+                intent.putExtra("url", "")
+            }
+            1 -> {
+                intent.putExtra("title", "企鹅大战")
+                intent.putExtra("url", "")
+            }
+            2 -> {
+                intent.putExtra("title", "快递小哥冲冲冲")
+                intent.putExtra("url", "")
+            }
+        }
+        startActivity(intent)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -156,13 +190,13 @@ class FullscreenActivity : AppCompatActivity() {
         override fun onScrollStateChanged(view: AbsListView, scrollState: Int) {
             when (scrollState) {
                 SCROLL_STATE_FLING -> {
-                    toggle()
+//                    toggle()
                 }
                 SCROLL_STATE_IDLE -> {
-                    toggle()
+//                    toggle()
                 }
                 SCROLL_STATE_TOUCH_SCROLL -> {
-                    toggle()
+//                    toggle()
                 }
             }
         }
@@ -178,9 +212,8 @@ class FullscreenActivity : AppCompatActivity() {
 
     private fun refreshList() {
         var contentView: MutableList<Int> = ArrayList()
-        contentView.add(0)
         contentView.add(1)
-        contentView.add(2)
+        contentView.add(1)
         detailAdapter.refreshAdapter(contentView)
     }
 
@@ -206,7 +239,7 @@ class FullscreenActivity : AppCompatActivity() {
 
     private fun show() {
         // Show the system bar
-        fullscreenContent.systemUiVisibility =
+        game_list.systemUiVisibility =
             View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
                     View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
         isFullscreen = true
