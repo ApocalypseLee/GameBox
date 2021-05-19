@@ -6,16 +6,22 @@ import android.os.*
 import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
-import android.widget.*
-import android.widget.AbsListView.OnScrollListener
-import android.widget.AbsListView.OnScrollListener.*
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationManagerCompat
+import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
+import com.yt.gamebox.Adapters.FragmentAdapter
+import com.yt.gamebox.Fragments.CashFragment
+import com.yt.gamebox.Fragments.GameFragment
+import com.yt.gamebox.Fragments.PrizeFragment
+import com.yt.gamebox.Fragments.WalletFragment
 import com.yt.gamebox.Services.*
 import com.yt.gamebox.Utils.NotificationUtils
 import com.yt.gamebox.Utils.PermissionUtils
 import com.yt.gamebox.Utils.SystemProperties
-import com.yt.gamebox.Widgets.DetailAdapter
 import com.yt.gamebox.data.MemoryEvent
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -27,14 +33,23 @@ import org.greenrobot.eventbus.ThreadMode
  * status bar and navigation/system bar) with user interaction.
  */
 class FullscreenActivity : AppCompatActivity() {
-    private lateinit var game_list: ListView
-    private val hideHandler = Handler()
-    private lateinit var detailAdapter: DetailAdapter
     private lateinit var mActivity: FullscreenActivity
-    private lateinit var pinballBG: ImageView
-    private lateinit var pingusBG: ImageView
-    private lateinit var expressBG: ImageView
+    private val hideHandler = Handler()
     private var run = false
+
+    private lateinit var naviBar: LinearLayout
+    private lateinit var itemGame: ImageView
+    private lateinit var itemCash: ImageView
+    private lateinit var itemPrize: ImageView
+    private lateinit var itemWallet: ImageView
+
+    private lateinit var viewPager: ViewPager
+    private lateinit var gameFragment: GameFragment
+    private lateinit var cashFragment: CashFragment
+    private lateinit var prizeFragment: PrizeFragment
+    private lateinit var walletFragment: WalletFragment
+    private lateinit var fragList: ArrayList<Fragment>
+    private lateinit var fragmentAdapter: FragmentAdapter
 
     companion object {
         /**
@@ -63,7 +78,7 @@ class FullscreenActivity : AppCompatActivity() {
         // Note that some of these constants are new as of API 16 (Jelly Bean)
         // and API 19 (KitKat). It is safe to use them, as they are inlined
         // at compile-time and do nothing on earlier devices.
-        game_list.systemUiVisibility =
+        naviBar.systemUiVisibility =
             View.SYSTEM_UI_FLAG_LOW_PROFILE or
                     View.SYSTEM_UI_FLAG_FULLSCREEN or
                     View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
@@ -122,42 +137,90 @@ class FullscreenActivity : AppCompatActivity() {
         isFullscreen = true
 
         // Set up the user interaction to manually show or hide the system UI.
-        pinballBG = findViewById(R.id.pinball_bg)
-        pinballBG.setOnClickListener {
-            gotoGamePage(0)
+        naviBar = findViewById(R.id.navi_bar)
+        itemGame = findViewById(R.id.item_game)
+        itemGame.setOnClickListener {
+            viewPager.setCurrentItem(0, true)
         }
-        pingusBG = findViewById(R.id.pingus_bg)
-        pingusBG.setOnClickListener {
-            gotoGamePage(1)
+        itemCash = findViewById(R.id.item_cash)
+        itemCash.setOnClickListener {
+            viewPager.setCurrentItem(1, true)
         }
-        expressBG = findViewById(R.id.express_bg)
-        expressBG.setOnClickListener {
-            gotoGamePage(2)
+        itemPrize = findViewById(R.id.item_prize)
+        itemPrize.setOnClickListener {
+            viewPager.setCurrentItem(2, true)
         }
-        game_list = findViewById(R.id.game_list)
-        game_list.setOnScrollListener(scrollListener)
-        detailAdapter = DetailAdapter(this, applicationContext)
-        detailAdapter.setContent()
-        game_list.adapter = detailAdapter
+        itemWallet = findViewById(R.id.item_wallet)
+        itemWallet.setOnClickListener {
+            viewPager.setCurrentItem(3, true)
+        }
+        itemGame.isSelected = true
+
+        gameFragment = GameFragment(this)
+        cashFragment = CashFragment()
+        prizeFragment = PrizeFragment()
+        walletFragment = WalletFragment()
+
+        fragList = ArrayList()
+        fragList.add(gameFragment)
+        fragList.add(cashFragment)
+        fragList.add(prizeFragment)
+        fragList.add(walletFragment)
+        fragmentAdapter = FragmentAdapter(supportFragmentManager, fragList)
+
+        viewPager = findViewById(R.id.viewpager)
+        viewPager.offscreenPageLimit = 4
+        viewPager.adapter = fragmentAdapter
+        viewPager.currentItem = 0
+        viewPager.setOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+            }
+
+            override fun onPageSelected(position: Int) {
+                /*此方法在页面被选中时调用*/
+                changeSelector(position)
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+                /*此方法是在状态改变的时候调用，其中arg0这个参数有三种状态（0，1，2）。
+                arg0 ==1的时辰默示正在滑动，
+                arg0==2的时辰默示滑动完毕了，
+                arg0==0的时辰默示什么都没做。*/
+            }
+        })
     }
 
-    fun gotoGamePage(position: Int) {
-        val intent = Intent(this, WebViewActivity::class.java)
+    private fun changeSelector(position: Int) {
         when (position) {
             0 -> {
-                intent.putExtra("title", "砰砰弹力球")
-                intent.putExtra("url", "")
+                itemGame.isSelected = true
+                itemCash.isSelected = false
+                itemPrize.isSelected = false
+                itemWallet.isSelected = false
             }
             1 -> {
-                intent.putExtra("title", "企鹅大战")
-                intent.putExtra("url", "")
+                itemGame.isSelected = false
+                itemCash.isSelected = true
+                itemPrize.isSelected = false
+                itemWallet.isSelected = false
             }
             2 -> {
-                intent.putExtra("title", "快递小哥冲冲冲")
-                intent.putExtra("url", "")
+                itemGame.isSelected = false
+                itemCash.isSelected = false
+                itemPrize.isSelected = true
+                itemWallet.isSelected = false
+            }
+            3 -> {
+                itemGame.isSelected = false
+                itemCash.isSelected = false
+                itemPrize.isSelected = false
+                itemWallet.isSelected = true
             }
         }
-        startActivity(intent)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -186,43 +249,12 @@ class FullscreenActivity : AppCompatActivity() {
         }
     }
 
-    val scrollListener: OnScrollListener = object : OnScrollListener {
-        override fun onScrollStateChanged(view: AbsListView, scrollState: Int) {
-            when (scrollState) {
-                SCROLL_STATE_FLING -> {
-//                    toggle()
-                }
-                SCROLL_STATE_IDLE -> {
-//                    toggle()
-                }
-                SCROLL_STATE_TOUCH_SCROLL -> {
-//                    toggle()
-                }
-            }
-        }
-
-        override fun onScroll(
-            view: AbsListView,
-            firstVisibleItem: Int,
-            visibleItemCount: Int,
-            totalItemCount: Int
-        ) {
-        }
-    }
-
-    private fun refreshList() {
-        var contentView: MutableList<Int> = ArrayList()
-        contentView.add(1)
-        contentView.add(1)
-        detailAdapter.refreshAdapter(contentView)
-    }
-
     private fun toggle() {
         if (isFullscreen) {
-            refreshList()
+            gameFragment.refreshList()
             hide()
         } else {
-            refreshList()
+            gameFragment.refreshList()
             show()
         }
     }
@@ -239,7 +271,7 @@ class FullscreenActivity : AppCompatActivity() {
 
     private fun show() {
         // Show the system bar
-        game_list.systemUiVisibility =
+        naviBar.systemUiVisibility =
             View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
                     View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
         isFullscreen = true
@@ -384,6 +416,6 @@ class FullscreenActivity : AppCompatActivity() {
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true, priority = 6)
     fun onGetMessage(message: MemoryEvent) {
-        refreshList()
+        gameFragment.refreshList()
     }
 }

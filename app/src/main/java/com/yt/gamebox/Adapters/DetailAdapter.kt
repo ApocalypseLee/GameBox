@@ -1,17 +1,15 @@
-package com.yt.gamebox.Widgets
+package com.yt.gamebox.Adapters
 
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import com.yt.gamebox.R
 import com.yt.gamebox.WebViewActivity
 import com.yt.gamebox.model.CustomCallback

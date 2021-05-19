@@ -32,4 +32,6 @@
     <color name="colorGreen">#06c168</color>
     <color name="colorGreenDark">#00904b</color>
     <color name="colorGreenTin">#00b05d</color>
+    <color name="colorBrown">#ffa04c08</color>
+    <color name="colorGrey">#fff4f4f4</color>
 </resources>
