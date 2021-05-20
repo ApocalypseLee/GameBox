@@ -38,11 +38,12 @@
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="40dp"
-            android:text="钱包"
+            android:text="@string/wallet"
             android:textColor="@color/white"
             android:textSize="48sp" />
 
         <ImageView
+            android:id="@+id/bind_wx"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/wallet"
@@ -109,7 +110,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/cash_content"
+                android:id="@+id/cash_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -121,7 +122,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="我的总红包券"
+                android:text="@string/cash_total"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -152,7 +153,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="可提现金额"
+                android:text="@string/can_take"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -168,7 +169,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="提现"
+            android:text="@string/take"
             android:textColor="@color/black"
             android:textSize="24sp" />
 
@@ -184,9 +185,11 @@
                 android:background="@drawable/newbie" />
 
             <TextView
+                android:id="@+id/newbie_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/newbie"
+                android:layout_marginStart="40dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginBottom="-50dp"
                 android:text="0.3元"
@@ -194,10 +197,13 @@
                 android:textSize="36sp" />
 
             <ImageView
+                android:id="@+id/newbie_takeoff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="30dp"
+                android:layout_marginEnd="5dp"
                 android:layout_marginRight="5dp"
                 android:background="@drawable/takeoff" />
         </RelativeLayout>
@@ -212,22 +218,26 @@
         android:weightSum="3">
 
         <LinearLayout
+            android:id="@+id/wallet_lv1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="1dp"
             android:layout_weight="1"
-            android:gravity="center"
             android:background="@drawable/wallet_bg3"
+            android:gravity="center"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/cash_lv1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="25"
                 android:layout_gravity="center"
+                android:text="25"
                 android:textColor="@color/black"
                 android:textSize="36sp" />
+
             <TextView
+                android:id="@+id/cash_lv1_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -237,22 +247,26 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/wallet_lv2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="1dp"
             android:layout_weight="1"
-            android:gravity="center"
             android:background="@drawable/wallet_bg3"
+            android:gravity="center"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/cash_lv2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="30"
                 android:layout_gravity="center"
+                android:text="30"
                 android:textColor="@color/black"
                 android:textSize="36sp" />
+
             <TextView
+                android:id="@+id/cash_lv2_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -262,22 +276,26 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/wallet_lv3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="1dp"
             android:layout_weight="1"
-            android:gravity="center"
             android:background="@drawable/wallet_bg3"
+            android:gravity="center"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/cash_lv3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="50"
                 android:layout_gravity="center"
+                android:text="50"
                 android:textColor="@color/black"
                 android:textSize="36sp" />
+
             <TextView
+                android:id="@+id/cash_lv3_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
