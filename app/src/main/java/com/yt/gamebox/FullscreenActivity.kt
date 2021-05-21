@@ -241,6 +241,16 @@ class FullscreenActivity : AppCompatActivity() {
         delayedHide(100)
     }
 
+    override fun onResume() {
+        super.onResume()
+        delayedHide(100)
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        delayedHide(100)
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         EventBus.getDefault().unregister(this)
