@@ -2,56 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:theme="@style/ThemeOverlay.MyApplication.FullscreenContainer"
+    tools:context=".WebViewActivity">
 
     <WebView
-        android:id="@+id/tuia_xuanfu"
+        android:id="@+id/game_web"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/buttons" />
+        android:layout_height="match_parent" />
 
-    <RelativeLayout
-        android:id="@+id/buttons"
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
-
-        <ImageButton
-            android:id="@+id/gobackWebView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="-5dp"
-            android:layout_marginRight="-5dp"
-            android:background="#FFFFFF"
-            android:contentDescription="TODO"
-            android:scaleX="0.5"
-            android:scaleY="0.5"
-            android:src="@drawable/goback" />
-
-        <ImageButton
-            android:id="@+id/closeWebView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="-5dp"
-            android:layout_marginLeft="-5dp"
-            android:layout_toEndOf="@+id/gobackWebView"
-            android:layout_toRightOf="@+id/gobackWebView"
-            android:background="#FFFFFF"
-            android:contentDescription="TODO"
-            android:scaleX="0.5"
-            android:scaleY="0.5"
-            android:src="@drawable/close" />
-
-        <TextView
-            android:id="@+id/game_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="今日福利"
-            android:textSize="17dp" />
-    </RelativeLayout>
 </RelativeLayout>

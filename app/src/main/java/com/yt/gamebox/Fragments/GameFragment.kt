@@ -1,6 +1,7 @@
 package com.yt.gamebox.Fragments
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,8 +15,11 @@ import com.yt.gamebox.R
 import com.yt.gamebox.WebViewActivity
 import com.yt.gamebox.Adapters.DetailAdapter
 
-class GameFragment(private val activity: Activity) : Fragment() {
-    private lateinit var game_list: ListView
+class GameFragment(
+    private val mActivity: Activity,
+    private val mContext: Context = mActivity.applicationContext
+) : Fragment() {
+    private lateinit var gameList: ListView
     private lateinit var detailAdapter: DetailAdapter
     private lateinit var pinballBG: ImageView
     private lateinit var pingusBG: ImageView
@@ -41,18 +45,21 @@ class GameFragment(private val activity: Activity) : Fragment() {
         expressBG.setOnClickListener {
             gotoGamePage(2)
         }
-        game_list = contentView.findViewById(R.id.game_list)
-        game_list.setOnScrollListener(scrollListener)
-        detailAdapter = DetailAdapter(activity, activity.applicationContext)
-        detailAdapter.setContent()
-        game_list.adapter = detailAdapter
+        gameList = contentView.findViewById(R.id.game_list)
+        gameList.setOnScrollListener(scrollListener)
+        detailAdapter = DetailAdapter(mActivity, mContext)
+        val list: MutableList<Int> = ArrayList()
+        for (i in 0..1)
+            list.add(i, DetailAdapter.VIEW_TYPE_GAME)
+        detailAdapter.setContent(list)
+        gameList.adapter = detailAdapter
 
         return contentView
     }
 
 
     fun gotoGamePage(position: Int) {
-        val intent = Intent(activity, WebViewActivity::class.java)
+        val intent = Intent(mActivity, WebViewActivity::class.java)
         when (position) {
             0 -> {
                 intent.putExtra("title", "砰砰弹力球")
@@ -103,6 +110,6 @@ class GameFragment(private val activity: Activity) : Fragment() {
     }
 
     fun getGameList(): ListView {
-        return game_list
+        return gameList
     }
 }

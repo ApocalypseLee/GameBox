@@ -6,16 +6,17 @@ import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.yt.gamebox.R
 import java.io.ByteArrayOutputStream
 
 
 object GlideUtil {
     fun displayImgByUri(context: Context, imgPath: String, view: View) {
-        Glide.with(context).load(imgPath).placeholder(-1).error(-1).into(view as ImageView)
+        Glide.with(context).load(imgPath).placeholder(R.drawable.loading).error(R.drawable.loading).into(view as ImageView)
     }
 
     fun displayImgByResId(context: Context, imgPath: Int, view: View) {
-        Glide.with(context).load(imgPath).placeholder(-1).error(-1).into(view as ImageView)
+        Glide.with(context).load(imgPath).placeholder(R.drawable.loading).error(R.drawable.loading).into(view as ImageView)
     }
 
     fun displayImgByUri(context: Context, imgPath: String, view: View, defaultImg: Int) {

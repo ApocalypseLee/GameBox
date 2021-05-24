@@ -38,4 +38,5 @@
     <string name="take">提现</string>
     <string name="cash_total">我的总红包券</string>
     <string name="wallet">钱包</string>
+    <string name="title_activity_web">FullscreenActivity</string>
 </resources>

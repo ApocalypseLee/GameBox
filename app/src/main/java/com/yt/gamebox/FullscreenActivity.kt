@@ -163,7 +163,7 @@ class FullscreenActivity : AppCompatActivity() {
         gameFragment = GameFragment(this)
         cashFragment = CashFragment()
         prizeFragment = PrizeFragment()
-        walletFragment = WalletFragment()
+        walletFragment = WalletFragment(this)
 
         fragList = ArrayList()
         fragList.add(gameFragment)

@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.yt.gamebox.R
 import com.yt.gamebox.WebViewActivity
@@ -17,17 +18,17 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class DetailAdapter(var activity: Activity, var context: Context) : BaseAdapter(), CustomCallback {
-    val VIEW_TYPE_GAME = 1
-    val VIEW_TYPE_COUNT = VIEW_TYPE_GAME + 1
+    companion object {
+        val VIEW_TYPE_GAME = 1
+        val VIEW_TYPE_WALLET = 2
+        val VIEW_TYPE_COUNT = VIEW_TYPE_WALLET + 1
+    }
 
-    var position = 0
-    var viewType = VIEW_TYPE_GAME
     var contentView: MutableList<Int> = ArrayList()
     var inflater: LayoutInflater? = LayoutInflater.from(context)
 
-    fun setContent() {
-        contentView.add(VIEW_TYPE_GAME)
-        contentView.add(VIEW_TYPE_GAME)
+    fun setContent(list: MutableList<Int>) {
+        contentView.addAll(list)
     }
 
     override fun getCount(): Int {
@@ -53,6 +54,12 @@ class DetailAdapter(var activity: Activity, var context: Context) : BaseAdapter(
                         bindViewHolder(view, type, position)
                     }
                 }
+                VIEW_TYPE_WALLET -> {
+                    if (getItem(position) != null) {
+                        view = inflater!!.inflate(R.layout.item_wallet_takeout, parent, false)
+                        bindViewHolder(view, type, position)
+                    }
+                }
                 else -> {
                     throw IllegalStateException("Unexpected value: $type")
                 }
@@ -71,7 +78,7 @@ class DetailAdapter(var activity: Activity, var context: Context) : BaseAdapter(
 //            return VIEW_TYPE_ACC
 //        else
 //            return VIEW_TYPE_DETAIL
-        return VIEW_TYPE_GAME
+        return contentView.get(position)
     }
 
     override fun getViewTypeCount(): Int {
@@ -81,18 +88,19 @@ class DetailAdapter(var activity: Activity, var context: Context) : BaseAdapter(
     fun bindViewHolder(view: View, type: Int, position: Int) {
         when (type) {
             VIEW_TYPE_GAME -> initHolderGame(view, position)
+            VIEW_TYPE_WALLET -> initHolderWallet(view, position)
         }
     }
 
     @SuppressLint("NewApi", "UseCompatLoadingForDrawables")
     private fun initHolderGame(view: View, position: Int) {
         val holderGame = ViewHolderGame()
-        holderGame.gameTitle = view.findViewById(R.id.game_item_title) as TextView
-        holderGame.gameLike = view.findViewById(R.id.game_item_like) as TextView
-        holderGame.gamePower = view.findViewById(R.id.game_item_power) as TextView
-        holderGame.gameBG = view.findViewById(R.id.game_item_bg) as ImageView
-        holderGame.gameIcon = view.findViewById(R.id.game_item_icon) as ImageView
-        holderGame.gameBG!!.setOnClickListener {
+        holderGame.gameTitle = view.findViewById(R.id.game_item_title)
+        holderGame.gameLike = view.findViewById(R.id.game_item_like)
+        holderGame.gamePower = view.findViewById(R.id.game_item_power)
+        holderGame.gameBG = view.findViewById(R.id.game_item_bg)
+        holderGame.gameIcon = view.findViewById(R.id.game_item_icon)
+        holderGame.gameBG.setOnClickListener {
             val intent = Intent(activity, WebViewActivity::class.java)
             when (position) {
                 0 -> {
@@ -109,20 +117,59 @@ class DetailAdapter(var activity: Activity, var context: Context) : BaseAdapter(
 
         when (position) {
             0 -> {
-                holderGame.gameTitle!!.setText("解救小猫")
-                holderGame.gameLike!!.setText("230万")
-                holderGame.gamePower!!.setText("7万")
-                holderGame.gameBG!!.background = context.getDrawable(R.drawable.cat_bg)
-                holderGame.gameIcon!!.background = context.getDrawable(R.drawable.cat_icon)
+                holderGame.gameTitle.setText("解救小猫")
+                holderGame.gameLike.setText("230万")
+                holderGame.gamePower.setText("7万")
+                holderGame.gameBG.background = context.getDrawable(R.drawable.cat_bg)
+                holderGame.gameIcon.background = context.getDrawable(R.drawable.cat_icon)
             }
             1 -> {
-                holderGame.gameTitle!!.setText("充电机器人")
-                holderGame.gameLike!!.setText("130万")
-                holderGame.gamePower!!.setText("9万")
-                holderGame.gameBG!!.background = context.getDrawable(R.drawable.robot_bg)
-                holderGame.gameIcon!!.background = context.getDrawable(R.drawable.robot_icon)
+                holderGame.gameTitle.setText("充电机器人")
+                holderGame.gameLike.setText("130万")
+                holderGame.gamePower.setText("9万")
+                holderGame.gameBG.background = context.getDrawable(R.drawable.robot_bg)
+                holderGame.gameIcon.background = context.getDrawable(R.drawable.robot_icon)
             }
         }
+    }
+
+    private fun initHolderWallet(view: View, position: Int) {
+        when (position) {
+            0 -> {
+                val holderWallet = ViewHolderWallet()
+                initWalletNewbie(holderWallet, view)
+            }
+        }
+
+    }
+
+    private fun initWalletNewbie(
+        holderWallet: ViewHolderWallet,
+        view: View
+    ) {
+        holderWallet.newbieContent = view.findViewById(R.id.newbie_content)
+        holderWallet.newbieTakeOut = view.findViewById(R.id.newbie_takeoff)
+        holderWallet.newbieTakeOut.setOnClickListener {
+
+        }
+        holderWallet.wallet1 = view.findViewById(R.id.wallet_lv1)
+        holderWallet.wallet1.setOnClickListener {
+
+        }
+        holderWallet.cash1 = view.findViewById(R.id.cash_lv1)
+        holderWallet.content1 = view.findViewById(R.id.cash_lv1_content)
+        holderWallet.wallet2 = view.findViewById(R.id.wallet_lv2)
+        holderWallet.wallet2.setOnClickListener {
+
+        }
+        holderWallet.cash2 = view.findViewById(R.id.cash_lv2)
+        holderWallet.content2 = view.findViewById(R.id.cash_lv2_content)
+        holderWallet.wallet3 = view.findViewById(R.id.wallet_lv3)
+        holderWallet.wallet3.setOnClickListener {
+
+        }
+        holderWallet.cash3 = view.findViewById(R.id.cash_lv3)
+        holderWallet.content3 = view.findViewById(R.id.cash_lv3_content)
     }
 
     override fun notifyDataSetChanged() {
@@ -135,17 +182,29 @@ class DetailAdapter(var activity: Activity, var context: Context) : BaseAdapter(
     }
 
     internal class ViewHolderGame {
-        var gameTitle: TextView? = null
-        var gameLike: TextView? = null
-        var gamePower: TextView? = null
-        var gameBG: ImageView? = null
-        var gameIcon: ImageView? = null
+        lateinit var gameTitle: TextView
+        lateinit var gameLike: TextView
+        lateinit var gamePower: TextView
+        lateinit var gameBG: ImageView
+        lateinit var gameIcon: ImageView
     }
 
+    internal class ViewHolderWallet {
+        lateinit var newbieContent: TextView
+        lateinit var newbieTakeOut: ImageView
+        lateinit var wallet1: LinearLayout
+        lateinit var cash1: TextView
+        lateinit var content1: TextView
+        lateinit var wallet2: LinearLayout
+        lateinit var cash2: TextView
+        lateinit var content2: TextView
+        lateinit var wallet3: LinearLayout
+        lateinit var cash3: TextView
+        lateinit var content3: TextView
+    }
+
+
     override fun notice(datamap: Map<String, Objects>?) {
-        val contentView: MutableList<Int> = ArrayList()
-        contentView.add(VIEW_TYPE_GAME)
-        contentView.add(VIEW_TYPE_GAME)
         refreshAdapter(contentView)
     }
 }
