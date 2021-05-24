@@ -18,4 +18,8 @@
 
     <dimen name="navi_button_width">60dp</dimen>
     <dimen name="navi_button_height">60dp</dimen>
+    <dimen name="game_item_icon_w2">60dp</dimen>
+    <dimen name="game_item_icon_h2">60dp</dimen>
+    <dimen name="game_item_icon_w1">80dp</dimen>
+    <dimen name="game_item_icon_h1">80dp</dimen>
 </resources>

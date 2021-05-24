@@ -6,21 +6,15 @@
     android:background="@color/colorGrey"
     android:orientation="vertical"
     android:theme="@style/ThemeOverlay.MyApplication.FullscreenContainer"
+    android:weightSum="3"
     tools:context=".FullscreenActivity">
 
-    <!-- The primary full-screen view. This can be replaced with whatever view
-         is needed to present your content, e.g. VideoView, SurfaceView,
-         TextureView, etc. -->
 
     <RelativeLayout
-        android:id="@+id/title_content"
-        style="@style/Widget.Theme.MyApplication.ButtonBar.Fullscreen"
         android:layout_width="match_parent"
-        android:layout_height="480dp"
-        android:layout_gravity="bottom|center_horizontal"
-        android:background="@drawable/title_bg"
-        android:orientation="horizontal"
-        tools:ignore="UselessParent">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/title_bg">
 
         <ImageView
             android:id="@+id/gamestap"
@@ -30,11 +24,43 @@
             android:layout_alignParentRight="true"
             android:background="@drawable/title_gametap" />
 
+        <TextView
+            android:id="@+id/title_game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/gamestap"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="40dp"
+            android:text="游戏"
+            android:textColor="@color/white"
+            android:textSize="48sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/gamestap"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/hint" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/title_bg"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
         <RelativeLayout
             android:id="@+id/pinball_item"
-            android:layout_width="240dp"
-            android:layout_height="240dp"
-            android:layout_marginTop="240dp">
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2">
 
             <ImageView
                 android:id="@+id/pinball_bg"
@@ -44,24 +70,25 @@
 
             <ImageView
                 android:id="@+id/pinball_icon"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="@dimen/game_item_icon_w1"
+                android:layout_height="@dimen/game_item_icon_h1"
                 android:layout_alignBottom="@+id/pinball_bg"
                 android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/pinball_icon" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
                 android:layout_alignEnd="@+id/pinball_icon"
                 android:layout_alignRight="@+id/pinball_icon"
                 android:layout_marginTop="160dp"
                 android:layout_marginEnd="-100dp"
                 android:layout_marginRight="-100dp"
-                android:textSize="16sp"
-                android:text="碰碰弹力球"/>
+                android:text="碰碰弹力球"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
             <ImageView
                 android:layout_width="20dp"
@@ -86,224 +113,204 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
                 android:layout_alignEnd="@+id/pinball_icon"
                 android:layout_alignRight="@+id/pinball_icon"
                 android:layout_marginTop="180dp"
                 android:layout_marginEnd="-70dp"
                 android:layout_marginRight="-70dp"
-                android:textSize="16sp"
-                android:text="555万"/>
+                android:text="555万"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
                 android:layout_alignEnd="@+id/pinball_icon"
                 android:layout_alignRight="@+id/pinball_icon"
                 android:layout_marginTop="200dp"
                 android:layout_marginEnd="-70dp"
                 android:layout_marginRight="-70dp"
-                android:textSize="16sp"
-                android:text="225万"/>
+                android:text="225万"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
 
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/pingus_item"
-            android:layout_width="170dp"
-            android:layout_height="120dp"
-            android:layout_alignEnd="@+id/pinball_item"
-            android:layout_alignRight="@+id/pinball_item"
-            android:layout_marginTop="240dp"
-            android:layout_marginEnd="-170dp"
-            android:layout_marginRight="-170dp">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.8"
+            android:orientation="vertical"
+            android:weightSum="2">
 
-            <ImageView
-                android:id="@+id/pingus_bg"
+            <RelativeLayout
+                android:id="@+id/pingus_item"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/pingus_bg" />
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                tools:ignore="NestedWeights">
 
-            <ImageView
-                android:id="@+id/pingus_icon"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/pingus_icon" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:layout_alignEnd="@+id/pingus_icon"
-                android:layout_alignRight="@+id/pingus_icon"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="-40dp"
-                android:layout_marginRight="-40dp"
-                android:textSize="16sp"
-                android:text="企鹅大战"/>
+                <ImageView
+                    android:id="@+id/pingus_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/pingus_bg" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:layout_alignEnd="@+id/pingus_icon"
-                android:layout_alignRight="@+id/pingus_icon"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="-70dp"
-                android:layout_marginRight="-70dp"
-                android:textSize="16sp"
-                android:text="225万"/>
+                <ImageView
+                    android:id="@+id/pingus_icon"
+                    android:layout_width="@dimen/game_item_icon_w2"
+                    android:layout_height="@dimen/game_item_icon_h2"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@drawable/pingus_icon" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:layout_alignEnd="@+id/pingus_icon"
-                android:layout_alignRight="@+id/pingus_icon"
-                android:layout_marginTop="70dp"
-                android:layout_marginEnd="-70dp"
-                android:layout_marginRight="-70dp"
-                android:textSize="16sp"
-                android:text="225万"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/pingus_icon"
+                    android:layout_alignRight="@+id/pingus_icon"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="-40dp"
+                    android:layout_marginRight="-40dp"
+                    android:text="企鹅大战"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignEnd="@+id/pingus_icon"
-                android:layout_alignRight="@+id/pingus_icon"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="-20dp"
-                android:layout_marginRight="-20dp"
-                android:background="@drawable/like" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/pingus_icon"
+                    android:layout_alignRight="@+id/pingus_icon"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="-70dp"
+                    android:layout_marginRight="-70dp"
+                    android:text="225万"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignEnd="@+id/pingus_icon"
-                android:layout_alignRight="@+id/pingus_icon"
-                android:layout_marginTop="70dp"
-                android:layout_marginEnd="-20dp"
-                android:layout_marginRight="-20dp"
-                android:background="@drawable/power" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/pingus_icon"
+                    android:layout_alignRight="@+id/pingus_icon"
+                    android:layout_marginTop="70dp"
+                    android:layout_marginEnd="-70dp"
+                    android:layout_marginRight="-70dp"
+                    android:text="225万"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
 
-        </RelativeLayout>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignEnd="@+id/pingus_icon"
+                    android:layout_alignRight="@+id/pingus_icon"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="-20dp"
+                    android:layout_marginRight="-20dp"
+                    android:background="@drawable/like" />
 
-        <RelativeLayout
-            android:id="@+id/express_item"
-            android:layout_width="170dp"
-            android:layout_height="120dp"
-            android:layout_alignEnd="@+id/pinball_item"
-            android:layout_alignRight="@+id/pinball_item"
-            android:layout_marginTop="360dp"
-            android:layout_marginEnd="-170dp"
-            android:layout_marginRight="-170dp">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignEnd="@+id/pingus_icon"
+                    android:layout_alignRight="@+id/pingus_icon"
+                    android:layout_marginTop="70dp"
+                    android:layout_marginEnd="-20dp"
+                    android:layout_marginRight="-20dp"
+                    android:background="@drawable/power" />
 
+            </RelativeLayout>
 
-            <ImageView
-                android:id="@+id/express_bg"
+            <RelativeLayout
+                android:id="@+id/express_item"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/express_bg" />
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
-            <ImageView
-                android:id="@+id/express_icon"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/express_icon" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:layout_alignEnd="@+id/express_icon"
-                android:layout_alignRight="@+id/express_icon"
-                android:layout_marginEnd="-60dp"
-                android:layout_marginRight="-60dp"
-                android:textSize="16sp"
-                android:text="快递小哥冲冲冲"/>
+                <ImageView
+                    android:id="@+id/express_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/express_bg" />
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignEnd="@+id/express_icon"
-                android:layout_alignRight="@+id/express_icon"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="-20dp"
-                android:layout_marginRight="-20dp"
-                android:background="@drawable/like" />
+                <ImageView
+                    android:id="@+id/express_icon"
+                    android:layout_width="@dimen/game_item_icon_w2"
+                    android:layout_height="@dimen/game_item_icon_h2"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@drawable/express_icon" />
 
-            <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:layout_alignEnd="@+id/express_icon"
-            android:layout_alignRight="@+id/express_icon"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="-70dp"
-            android:layout_marginRight="-70dp"
-            android:textSize="16sp"
-            android:text="225万"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/express_icon"
+                    android:layout_alignRight="@+id/express_icon"
+                    android:layout_marginEnd="-60dp"
+                    android:layout_marginRight="-60dp"
+                    android:text="快递小哥冲冲冲"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:layout_alignEnd="@+id/express_icon"
-                android:layout_alignRight="@+id/express_icon"
-                android:layout_marginTop="70dp"
-                android:layout_marginEnd="-70dp"
-                android:layout_marginRight="-70dp"
-                android:textSize="16sp"
-                android:text="225万"/>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignEnd="@+id/express_icon"
+                    android:layout_alignRight="@+id/express_icon"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="-20dp"
+                    android:layout_marginRight="-20dp"
+                    android:background="@drawable/like" />
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignEnd="@+id/express_icon"
-                android:layout_alignRight="@+id/express_icon"
-                android:layout_marginTop="70dp"
-                android:layout_marginEnd="-20dp"
-                android:layout_marginRight="-20dp"
-                android:background="@drawable/power" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/express_icon"
+                    android:layout_alignRight="@+id/express_icon"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="-70dp"
+                    android:layout_marginRight="-70dp"
+                    android:text="225万"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
 
-        </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/express_icon"
+                    android:layout_alignRight="@+id/express_icon"
+                    android:layout_marginTop="70dp"
+                    android:layout_marginEnd="-70dp"
+                    android:layout_marginRight="-70dp"
+                    android:text="225万"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/title_game"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/gamestap"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="40dp"
-            android:text="游戏"
-            android:textColor="@color/white"
-            android:textSize="48sp" />
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignEnd="@+id/express_icon"
+                    android:layout_alignRight="@+id/express_icon"
+                    android:layout_marginTop="70dp"
+                    android:layout_marginEnd="-20dp"
+                    android:layout_marginRight="-20dp"
+                    android:background="@drawable/power" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/gamestap"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginEnd="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="40dp"
-            android:background="@drawable/hint" />
+            </RelativeLayout>
+        </LinearLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <ListView
         android:id="@+id/game_list"
-        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="1" />
 
 </LinearLayout>

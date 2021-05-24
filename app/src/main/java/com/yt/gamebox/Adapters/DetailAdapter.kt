@@ -49,7 +49,7 @@ class DetailAdapter(var activity: Activity, var context: Context) : BaseAdapter(
             when (type) {
                 VIEW_TYPE_GAME -> {
                     if (getItem(position) != null) {
-                        view = inflater!!.inflate(R.layout.game_layout, parent, false)
+                        view = inflater!!.inflate(R.layout.item_game_detail, parent, false)
                         bindViewHolder(view, type, position)
                     }
                 }

@@ -105,6 +105,6 @@ class FollowTouchView(context: Context, private var percent: Int) : BaseFloatWin
     }
 
     override fun onAddWindowFailed(e: Exception?) {
-        TODO("Not yet implemented")
+
     }
 }
