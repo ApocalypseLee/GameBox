@@ -6,5 +6,5 @@ data class GameBean(
     var gameBGUrl: String,
     var gameName: String,
     var gameLikes: String,
-    var gameDownloads: String
+    var gameDownloads: String,
 )

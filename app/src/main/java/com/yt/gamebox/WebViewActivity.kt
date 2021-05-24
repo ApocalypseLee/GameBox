@@ -124,7 +124,7 @@ class WebViewActivity : AppCompatActivity() {
             url
         }).toString()
         else {
-            "http://192.168.101.8:7456/build/"
+            Constants.defaultGameUrl
         }
         webView.loadUrl(URL)
         webView.setWebViewClient(object : WebViewClient() {

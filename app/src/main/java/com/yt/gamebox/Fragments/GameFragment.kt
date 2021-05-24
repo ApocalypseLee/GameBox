@@ -103,9 +103,9 @@ class GameFragment(
 
 
     fun refreshList() {
-        var contentView: MutableList<Int> = ArrayList()
-        contentView.add(1)
-        contentView.add(1)
+        val contentView: MutableList<Int> = ArrayList()
+        contentView.add(DetailAdapter.VIEW_TYPE_GAME)
+        contentView.add(DetailAdapter.VIEW_TYPE_GAME)
         detailAdapter.refreshAdapter(contentView)
     }
 

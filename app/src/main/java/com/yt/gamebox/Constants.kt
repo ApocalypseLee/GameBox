@@ -1,6 +1,9 @@
 package com.yt.gamebox
 
 object Constants {
+    const val baseUrl = "https://raw.githubusercontent.com/"
+    const val defaultGameUrl = "http://192.168.101.8:7456/build/"
+
     const val openServiceDefend = 1
     const val stopServiceDefend = 0
     var isOpenServiceDefend = 1 //是否开启进程守护，默认开启val isDebug = true
