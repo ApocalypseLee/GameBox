@@ -12,19 +12,19 @@
         tools:ignore="MissingConstraints">
 
         <ImageView
+            android:scaleType="fitXY"
             android:id="@+id/game_item_bg"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/pingus_bg" />
+            android:layout_height="match_parent" />
 
         <ImageView
+            android:scaleType="fitXY"
             android:id="@+id/game_item_icon"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="@dimen/item_game_icon_size"
+            android:layout_height="@dimen/item_game_icon_size"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/pingus_icon" />
+            android:layout_marginTop="20dp"/>
 
         <TextView
             android:id="@+id/game_item_title"
@@ -35,7 +35,6 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="-110dp"
             android:layout_marginRight="-110dp"
-            android:text="企鹅大战"
             android:textColor="@color/white"
             android:textSize="24sp" />
 
@@ -48,7 +47,6 @@
             android:layout_marginTop="50dp"
             android:layout_marginEnd="-100dp"
             android:layout_marginRight="-100dp"
-            android:text="225万"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
@@ -61,7 +59,6 @@
             android:layout_marginTop="80dp"
             android:layout_marginEnd="-100dp"
             android:layout_marginRight="-100dp"
-            android:text="225万"
             android:textColor="@color/white"
             android:textSize="20sp" />
 

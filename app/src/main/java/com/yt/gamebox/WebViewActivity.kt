@@ -3,12 +3,14 @@ package com.yt.gamebox
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.text.TextUtils
 import android.view.View
 import android.view.WindowManager
 import android.webkit.*
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 
 class WebViewActivity : AppCompatActivity() {
@@ -100,29 +102,34 @@ class WebViewActivity : AppCompatActivity() {
         isFullscreen = true
 
         webView = findViewById(R.id.game_web)
-        val webSettings = webView.getSettings()
-        webSettings.javaScriptEnabled = true
-        webSettings.allowFileAccess = true
-        webSettings.domStorageEnabled = true
-        webSettings.setAppCacheEnabled(true)
-        webSettings.domStorageEnabled = true
-        webSettings.supportMultipleWindows()
-        webSettings.allowContentAccess = true
-        webSettings.layoutAlgorithm = WebSettings.LayoutAlgorithm.NARROW_COLUMNS
-        webSettings.useWideViewPort = true
-        webSettings.loadWithOverviewMode = true
-        webSettings.savePassword = true
-        webSettings.saveFormData = true
-        webSettings.javaScriptCanOpenWindowsAutomatically = true
-        webSettings.loadsImagesAutomatically = true
-        webSettings.builtInZoomControls = true
+        webView.settings.javaScriptEnabled = true
+        webView.settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        webView.settings.allowFileAccess = true
+        webView.settings.domStorageEnabled = true
+
+        webView.settings.setAppCacheEnabled(true)
+        webView.settings.setAppCacheMaxSize(1024 * 1024 * 8)
+        val appCachePath = applicationContext.cacheDir.absolutePath
+        webView.settings.setAppCachePath(appCachePath)
+        webView.settings.savePassword = true
+        webView.settings.saveFormData = true
+
+        webView.settings.supportMultipleWindows()
+        webView.settings.allowContentAccess = true
+        webView.settings.layoutAlgorithm = WebSettings.LayoutAlgorithm.NARROW_COLUMNS
+        webView.settings.useWideViewPort = true
+        webView.settings.loadWithOverviewMode = true
+        webView.settings.javaScriptCanOpenWindowsAutomatically = true
+        webView.settings.loadsImagesAutomatically = true
+        webView.settings.builtInZoomControls = true
+
+
+
 
         val intent = intent ?: return
         URL = String()
         val url = intent.getStringExtra("url")
-        URL = if (!TextUtils.isEmpty(url)) ({
-            url
-        }).toString()
+        URL = if (!TextUtils.isEmpty(url)) url.toString()
         else {
             Constants.defaultGameUrl
         }
@@ -132,6 +139,16 @@ class WebViewActivity : AppCompatActivity() {
 //                return super.shouldOverrideUrlLoading(view,url);
                 webView.setWebChromeClient(WebChromeClient())
                 view.loadUrl(url)
+                return true
+            }
+
+            @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+            override fun shouldOverrideUrlLoading(
+                view: WebView?,
+                request: WebResourceRequest?
+            ): Boolean {
+                webView.setWebChromeClient(WebChromeClient())
+                view!!.loadUrl(request!!.getUrl().toString())
                 return true
             }
         })

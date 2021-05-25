@@ -60,13 +60,14 @@
             android:id="@+id/pinball_item"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1.2">
+            android:layout_weight="1.2"
+            tools:ignore="NestedWeights">
 
             <ImageView
                 android:id="@+id/pinball_bg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/pinball_bg" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/pinball_icon"
@@ -76,9 +77,10 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/pinball_icon" />
+                android:scaleType="fitXY" />
 
             <TextView
+                android:id="@+id/pinball_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@+id/pinball_icon"
@@ -86,7 +88,6 @@
                 android:layout_marginTop="160dp"
                 android:layout_marginEnd="-100dp"
                 android:layout_marginRight="-100dp"
-                android:text="碰碰弹力球"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -95,7 +96,7 @@
                 android:layout_height="20dp"
                 android:layout_alignEnd="@+id/pinball_icon"
                 android:layout_alignRight="@+id/pinball_icon"
-                android:layout_marginTop="200dp"
+                android:layout_marginTop="180dp"
                 android:layout_marginEnd="-20dp"
                 android:layout_marginRight="-20dp"
                 android:background="@drawable/like" />
@@ -105,12 +106,13 @@
                 android:layout_height="20dp"
                 android:layout_alignEnd="@+id/pinball_icon"
                 android:layout_alignRight="@+id/pinball_icon"
-                android:layout_marginTop="240dp"
+                android:layout_marginTop="200dp"
                 android:layout_marginEnd="-20dp"
                 android:layout_marginRight="-20dp"
                 android:background="@drawable/power" />
 
             <TextView
+                android:id="@+id/pinball_like"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@+id/pinball_icon"
@@ -118,11 +120,11 @@
                 android:layout_marginTop="180dp"
                 android:layout_marginEnd="-70dp"
                 android:layout_marginRight="-70dp"
-                android:text="555万"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/pinball_download"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@+id/pinball_icon"
@@ -130,7 +132,6 @@
                 android:layout_marginTop="200dp"
                 android:layout_marginEnd="-70dp"
                 android:layout_marginRight="-70dp"
-                android:text="225万"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -155,7 +156,7 @@
                     android:id="@+id/pingus_bg"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/pingus_bg" />
+                    android:scaleType="fitXY" />
 
                 <ImageView
                     android:id="@+id/pingus_icon"
@@ -164,9 +165,10 @@
                     android:layout_marginStart="5dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="40dp"
-                    android:background="@drawable/pingus_icon" />
+                    android:scaleType="fitXY" />
 
                 <TextView
+                    android:id="@+id/pingus_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignEnd="@+id/pingus_icon"
@@ -174,11 +176,11 @@
                     android:layout_marginTop="0dp"
                     android:layout_marginEnd="-40dp"
                     android:layout_marginRight="-40dp"
-                    android:text="企鹅大战"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/pingus_like"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignEnd="@+id/pingus_icon"
@@ -186,11 +188,11 @@
                     android:layout_marginTop="40dp"
                     android:layout_marginEnd="-70dp"
                     android:layout_marginRight="-70dp"
-                    android:text="225万"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/pingus_download"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignEnd="@+id/pingus_icon"
@@ -198,7 +200,6 @@
                     android:layout_marginTop="70dp"
                     android:layout_marginEnd="-70dp"
                     android:layout_marginRight="-70dp"
-                    android:text="225万"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 
@@ -235,7 +236,7 @@
                     android:id="@+id/express_bg"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/express_bg" />
+                    android:scaleType="fitXY" />
 
                 <ImageView
                     android:id="@+id/express_icon"
@@ -244,16 +245,16 @@
                     android:layout_marginStart="5dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="40dp"
-                    android:background="@drawable/express_icon" />
+                    android:scaleType="fitXY" />
 
                 <TextView
+                    android:id="@+id/express_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignEnd="@+id/express_icon"
                     android:layout_alignRight="@+id/express_icon"
                     android:layout_marginEnd="-60dp"
                     android:layout_marginRight="-60dp"
-                    android:text="快递小哥冲冲冲"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 
@@ -268,6 +269,7 @@
                     android:background="@drawable/like" />
 
                 <TextView
+                    android:id="@+id/express_like"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignEnd="@+id/express_icon"
@@ -275,11 +277,11 @@
                     android:layout_marginTop="40dp"
                     android:layout_marginEnd="-70dp"
                     android:layout_marginRight="-70dp"
-                    android:text="225万"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/express_download"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignEnd="@+id/express_icon"
@@ -287,7 +289,6 @@
                     android:layout_marginTop="70dp"
                     android:layout_marginEnd="-70dp"
                     android:layout_marginRight="-70dp"
-                    android:text="225万"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 

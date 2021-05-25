@@ -17,6 +17,7 @@ import com.yt.gamebox.Adapters.DetailAdapter
 import com.yt.gamebox.R
 import com.yt.gamebox.Utils.GlideUtil
 import com.yt.gamebox.Utils.SystemProperties
+import com.yt.gamebox.model.NewbieBean
 
 class WalletFragment(
     private val mActivity: Activity,
@@ -31,6 +32,19 @@ class WalletFragment(
     private lateinit var totalCash: TextView
     private lateinit var canTakeCash: TextView
 
+    private lateinit var dataList: MutableList<Any>
+
+    val newbieBean = NewbieBean(
+        id = 0,
+        newbieCash = "0.3",
+        walletCashLV1 = "25",
+        walletCashLV2 = "30",
+        walletCashLV3 = "50",
+        walletCostLV1 = "25000000",
+        walletCostLV2 = "30000000",
+        walletCostLV3 = "50000000"
+    )
+
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,6 +53,11 @@ class WalletFragment(
     ): View {
 
         val contentView: View = inflater.inflate(R.layout.fragment_wallet, container, false)
+
+        dataList = ArrayList()
+        dataList.add(newbieBean)
+
+
         avatar = contentView.findViewById(R.id.avatar)
         val bitmap = BitmapFactory.decodeResource(resources, R.drawable.default_avatar)
         GlideUtil.displayRoundImgByBitmap(mContext, bitmap, avatar, R.drawable.loading)
@@ -60,9 +79,7 @@ class WalletFragment(
         walletList = contentView.findViewById(R.id.wallet_list)
         walletList.setOnScrollListener(scrollListener)
         detailAdapter = DetailAdapter(mActivity, mContext)
-        val list: MutableList<Int> = ArrayList()
-        list.add(0, DetailAdapter.VIEW_TYPE_WALLET)
-        detailAdapter.setContent(list)
+        detailAdapter.setContent(dataList)
         walletList.adapter = detailAdapter
 
 

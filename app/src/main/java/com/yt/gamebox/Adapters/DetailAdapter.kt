@@ -12,8 +12,11 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.yt.gamebox.R
+import com.yt.gamebox.Utils.GlideUtil
 import com.yt.gamebox.WebViewActivity
 import com.yt.gamebox.model.CustomCallback
+import com.yt.gamebox.model.GameBean
+import com.yt.gamebox.model.NewbieBean
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -24,23 +27,31 @@ class DetailAdapter(var activity: Activity, var context: Context) : BaseAdapter(
         val VIEW_TYPE_COUNT = VIEW_TYPE_WALLET + 1
     }
 
-    var contentView: MutableList<Int> = ArrayList()
+    var itemData: MutableList<Any> = ArrayList()
     var inflater: LayoutInflater? = LayoutInflater.from(context)
 
-    fun setContent(list: MutableList<Int>) {
-        contentView.addAll(list)
+    fun setContent(list: MutableList<Any>) {
+        itemData.addAll(list)
     }
 
     override fun getCount(): Int {
-        return contentView.size
+        return itemData.size
     }
 
-    override fun getItem(position: Int): Int? {
-        return if (contentView.isEmpty() || position < 0 || position > contentView.size) null else contentView[position]
+    override fun getItem(position: Int): Any? {
+        return if (itemData.isEmpty() || position < 0 || position > itemData.size) null else itemData[position]
     }
 
     override fun getItemId(position: Int): Long {
-        return if (contentView.isEmpty() || position < 0 || position > contentView.size) -1 else contentView[position].toLong()
+        if (itemData[position] is GameBean) {
+            val data: GameBean = itemData[position] as GameBean
+            return data.id
+        } else if (itemData[position] is NewbieBean) {
+            val data: NewbieBean = itemData[position] as NewbieBean
+            return data.id
+        }
+        return if (itemData.isEmpty() || position < 0 || position > itemData.size) -1 else itemData[position].hashCode()
+            .toLong()
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
@@ -72,17 +83,18 @@ class DetailAdapter(var activity: Activity, var context: Context) : BaseAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-//        if (position == 0) {
-//            return VIEW_TYPE_HEAD
-//        } else if (position % 2 == 0)
-//            return VIEW_TYPE_ACC
-//        else
-//            return VIEW_TYPE_DETAIL
-        return contentView.get(position)
+        if (itemData[position] is GameBean) {
+            val data: GameBean = itemData[position] as GameBean
+            return data.type
+        } else if (itemData[position] is NewbieBean) {
+            val data: NewbieBean = itemData[position] as NewbieBean
+            return data.type
+        }
+        return -1
     }
 
     override fun getViewTypeCount(): Int {
-        return contentView.size
+        return itemData.size
     }
 
     fun bindViewHolder(view: View, type: Int, position: Int) {
@@ -94,24 +106,33 @@ class DetailAdapter(var activity: Activity, var context: Context) : BaseAdapter(
 
     @SuppressLint("NewApi", "UseCompatLoadingForDrawables")
     private fun initHolderGame(view: View, position: Int) {
+        val data: GameBean = itemData[position] as GameBean
         val holderGame = ViewHolderGame()
+
         holderGame.gameTitle = view.findViewById(R.id.game_item_title)
+        holderGame.gameTitle.setText(data.gameName)
+
         holderGame.gameLike = view.findViewById(R.id.game_item_like)
+        holderGame.gameLike.setText(data.gameLikes)
+
         holderGame.gamePower = view.findViewById(R.id.game_item_power)
-        holderGame.gameBG = view.findViewById(R.id.game_item_bg)
+        holderGame.gamePower.setText(data.gameDownloads)
+
         holderGame.gameIcon = view.findViewById(R.id.game_item_icon)
+        if (data.gameIconUrl.isEmpty())
+            GlideUtil.displayImgByResId(context, data.gameIconResID, holderGame.gameIcon)
+        else
+            GlideUtil.displayImgByUri(context, data.gameIconUrl, holderGame.gameIcon)
+
+        holderGame.gameBG = view.findViewById(R.id.game_item_bg)
+        if (data.gameBGUrl.isEmpty())
+            GlideUtil.displayImgByResId(context, data.gameBGResID, holderGame.gameBG)
+        else
+            GlideUtil.displayImgByUri(context, data.gameBGUrl, holderGame.gameBG)
         holderGame.gameBG.setOnClickListener {
             val intent = Intent(activity, WebViewActivity::class.java)
-            when (position) {
-                0 -> {
-                    intent.putExtra("title", "解救小猫")
-                    intent.putExtra("url", "")
-                }
-                1 -> {
-                    intent.putExtra("title", "充电机器人")
-                    intent.putExtra("url", "")
-                }
-            }
+            intent.putExtra("title", data.gameName)
+            intent.putExtra("url", data.gameUrl)
             activity.startActivity(intent)
         }
 
@@ -133,51 +154,52 @@ class DetailAdapter(var activity: Activity, var context: Context) : BaseAdapter(
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initHolderWallet(view: View, position: Int) {
-        when (position) {
-            0 -> {
-                val holderWallet = ViewHolderWallet()
-                initWalletNewbie(holderWallet, view)
-            }
-        }
-
-    }
-
-    private fun initWalletNewbie(
-        holderWallet: ViewHolderWallet,
-        view: View
-    ) {
+        val data: NewbieBean = itemData[position] as NewbieBean
+        val holderWallet = ViewHolderWallet()
         holderWallet.newbieContent = view.findViewById(R.id.newbie_content)
+        holderWallet.newbieContent.setText(data.newbieCash + "元")
         holderWallet.newbieTakeOut = view.findViewById(R.id.newbie_takeoff)
         holderWallet.newbieTakeOut.setOnClickListener {
 
         }
+
         holderWallet.wallet1 = view.findViewById(R.id.wallet_lv1)
         holderWallet.wallet1.setOnClickListener {
 
         }
         holderWallet.cash1 = view.findViewById(R.id.cash_lv1)
+        holderWallet.cash1.setText(data.walletCashLV1 + "元")
         holderWallet.content1 = view.findViewById(R.id.cash_lv1_content)
+        holderWallet.content1.setText(data.walletCostLV1 + "元")
+
         holderWallet.wallet2 = view.findViewById(R.id.wallet_lv2)
         holderWallet.wallet2.setOnClickListener {
 
         }
         holderWallet.cash2 = view.findViewById(R.id.cash_lv2)
+        holderWallet.cash2.setText(data.walletCashLV2 + "元")
         holderWallet.content2 = view.findViewById(R.id.cash_lv2_content)
+        holderWallet.content2.setText(data.walletCostLV2 + "元")
+
         holderWallet.wallet3 = view.findViewById(R.id.wallet_lv3)
         holderWallet.wallet3.setOnClickListener {
 
         }
         holderWallet.cash3 = view.findViewById(R.id.cash_lv3)
+        holderWallet.cash3.setText(data.walletCashLV3 + "元")
         holderWallet.content3 = view.findViewById(R.id.cash_lv3_content)
+        holderWallet.content3.setText(data.walletCostLV3 + "元")
     }
+
 
     override fun notifyDataSetChanged() {
         super.notifyDataSetChanged()
     }
 
-    fun refreshAdapter(contentView: MutableList<Int>) {
-        this.contentView = contentView
+    fun refreshAdapter(contentView: MutableList<Any>) {
+        this.itemData = contentView
         notifyDataSetChanged()
     }
 
@@ -204,7 +226,7 @@ class DetailAdapter(var activity: Activity, var context: Context) : BaseAdapter(
     }
 
 
-    override fun notice(datamap: Map<String, Objects>?) {
-        refreshAdapter(contentView)
+    override fun notice(datamap: Map<String, Any>) {
+        refreshAdapter(itemData)
     }
 }
