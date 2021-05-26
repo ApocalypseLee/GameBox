@@ -17,6 +17,7 @@ import com.yt.gamebox.WebViewActivity
 import com.yt.gamebox.Adapters.DetailAdapter
 import com.yt.gamebox.Utils.GlideUtil
 import com.yt.gamebox.model.GameBean
+import com.yt.gamebox.model.GamePageBean
 
 class GameFragment(
     private val mActivity: Activity,
@@ -42,6 +43,8 @@ class GameFragment(
 
     private lateinit var listSP: MutableList<Any>
     private lateinit var listGame: MutableList<Any>
+    private lateinit var gamePageBean: GamePageBean
+    private lateinit var gameBeanList: MutableList<GameBean>
 
     val gameBean0 = GameBean(
         id = 0,
@@ -106,6 +109,9 @@ class GameFragment(
     ): View {
 
         val contentView: View = inflater.inflate(R.layout.fragment_game, container, false)
+        gameBeanList = ArrayList()
+        gamePageBean = GamePageBean(id = 0L, gameList = gameBeanList)
+
         listSP = ArrayList()
         listSP.add(gameBean0)
         listSP.add(gameBean1)

@@ -18,6 +18,7 @@ import com.yt.gamebox.R
 import com.yt.gamebox.Utils.GlideUtil
 import com.yt.gamebox.Utils.SystemProperties
 import com.yt.gamebox.model.NewbieBean
+import com.yt.gamebox.model.UserBean
 
 class WalletFragment(
     private val mActivity: Activity,
@@ -34,16 +35,9 @@ class WalletFragment(
 
     private lateinit var dataList: MutableList<Any>
 
-    val newbieBean = NewbieBean(
-        id = 0,
-        newbieCash = "0.3",
-        walletCashLV1 = "25",
-        walletCashLV2 = "30",
-        walletCashLV3 = "50",
-        walletCostLV1 = "25000000",
-        walletCostLV2 = "30000000",
-        walletCostLV3 = "50000000"
-    )
+    private lateinit var userBean: UserBean
+    private lateinit var newbieBean: NewbieBean
+
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -54,27 +48,65 @@ class WalletFragment(
 
         val contentView: View = inflater.inflate(R.layout.fragment_wallet, container, false)
 
+        userBean = UserBean(
+            id = 0,
+            userID = "",
+            userName = "",
+            userAvatar = "",
+            binded = false,
+            cashTotal = "545000055444",
+            cashTakeout = "685.74",
+            newbieBean = NewbieBean(
+                id = 0,
+                newbieCash = "0.3",
+                walletCashLV1 = "25",
+                walletCashLV2 = "30",
+                walletCashLV3 = "50",
+                walletCostLV1 = "25000000",
+                walletCostLV2 = "30000000",
+                walletCostLV3 = "50000000"
+            )
+        )
+        newbieBean = userBean.newbieBean
+
         dataList = ArrayList()
         dataList.add(newbieBean)
 
 
         avatar = contentView.findViewById(R.id.avatar)
-        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.default_avatar)
-        GlideUtil.displayRoundImgByBitmap(mContext, bitmap, avatar, R.drawable.loading)
+        if (userBean.userAvatar.isEmpty()) {
+            val bitmap = BitmapFactory.decodeResource(resources, R.drawable.default_avatar)
+            GlideUtil.displayRoundImgByBitmap(mContext, bitmap, avatar, R.drawable.loading)
+        } else {
+            GlideUtil.displayRoundImgByPath(
+                mContext,
+                userBean.userAvatar,
+                avatar,
+                R.drawable.default_avatar
+            )
+        }
         bindWX = contentView.findViewById(R.id.bind_wx)
+        if (userBean.binded)
+            bindWX.visibility = View.GONE
         bindWX.setOnClickListener {
             // TODO: 2021/5/24  wx login
         }
         userName = contentView.findViewById(R.id.user_name)
-        userName.setText("游客" + SystemProperties.getUUID())
+        if (userBean.userName.isEmpty())
+            userName.setText("游客" + SystemProperties.getUUID())
+        else
+            userName.setText(userBean.userName)
 
         userID = contentView.findViewById(R.id.user_id)
-        userID.setText(SystemProperties.getUUID())
+        if (userBean.userID.isEmpty())
+            userID.setText(SystemProperties.getUUID())
+        else
+            userID.setText(userBean.userID)
 
         totalCash = contentView.findViewById(R.id.cash_total)
-//        totalCash.setText(SystemProperties.getUUID())
+        totalCash.setText(userBean.cashTotal)
         canTakeCash = contentView.findViewById(R.id.cash_take)
-//        canTakeCash.setText(SystemProperties.getUUID())
+        canTakeCash.setText(userBean.cashTakeout)
 
         walletList = contentView.findViewById(R.id.wallet_list)
         walletList.setOnScrollListener(scrollListener)
