@@ -8,15 +8,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AbsListView
 import android.widget.ImageView
-import android.widget.ListView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.yt.gamebox.Adapters.DetailAdapter
 import com.yt.gamebox.R
 import com.yt.gamebox.Utils.GlideUtil
 import com.yt.gamebox.Utils.SystemProperties
+import com.yt.gamebox.Widgets.HorizontalRecyclerView
 import com.yt.gamebox.model.NewbieBean
 import com.yt.gamebox.model.UserBean
 
@@ -24,8 +24,8 @@ class WalletFragment(
     private val mActivity: Activity,
     private var mContext: Context = mActivity.applicationContext
 ) : Fragment() {
-    private lateinit var walletList: ListView
-    private lateinit var detailAdapter: DetailAdapter
+    private lateinit var walletList: HorizontalRecyclerView
+    private lateinit var detailAdapter: DetailAdapter<NewbieBean>
     private lateinit var avatar: ImageView
     private lateinit var bindWX: ImageView
     private lateinit var userName: TextView
@@ -33,7 +33,7 @@ class WalletFragment(
     private lateinit var totalCash: TextView
     private lateinit var canTakeCash: TextView
 
-    private lateinit var dataList: MutableList<Any>
+    private lateinit var dataList: MutableList<NewbieBean>
 
     private lateinit var userBean: UserBean
     private lateinit var newbieBean: NewbieBean
@@ -109,33 +109,11 @@ class WalletFragment(
         canTakeCash.setText(userBean.cashTakeout)
 
         walletList = contentView.findViewById(R.id.wallet_list)
-        walletList.setOnScrollListener(scrollListener)
-        detailAdapter = DetailAdapter(mActivity, mContext)
-        detailAdapter.setContent(dataList)
+        walletList.layoutManager = LinearLayoutManager(mContext)
+        detailAdapter = DetailAdapter(mActivity, mContext, R.layout.item_wallet_takeout, dataList)
         walletList.adapter = detailAdapter
 
 
         return contentView
-    }
-
-    val scrollListener: AbsListView.OnScrollListener = object : AbsListView.OnScrollListener {
-        override fun onScrollStateChanged(view: AbsListView, scrollState: Int) {
-            when (scrollState) {
-                AbsListView.OnScrollListener.SCROLL_STATE_FLING -> {
-                }
-                AbsListView.OnScrollListener.SCROLL_STATE_IDLE -> {
-                }
-                AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL -> {
-                }
-            }
-        }
-
-        override fun onScroll(
-            view: AbsListView?,
-            firstVisibleItem: Int,
-            visibleItemCount: Int,
-            totalItemCount: Int
-        ) {
-        }
     }
 }

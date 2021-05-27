@@ -3,315 +3,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorGrey"
+    android:background="@drawable/tile_bg"
     android:orientation="vertical"
-    android:theme="@style/ThemeOverlay.MyApplication.FullscreenContainer"
     android:weightSum="3"
     tools:context=".FullscreenActivity">
 
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@drawable/title_bg">
+        android:layout_weight="1.2"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/gamestap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/title_gametap" />
-
-        <TextView
-            android:id="@+id/title_game"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/gamestap"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="40dp"
-            android:text="游戏"
-            android:textColor="@color/white"
-            android:textSize="48sp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/gamestap"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginEnd="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="40dp"
-            android:background="@drawable/hint" />
-    </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@drawable/title_bg"
-        android:orientation="horizontal"
-        android:weightSum="2">
-
-        <RelativeLayout
-            android:id="@+id/pinball_item"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.2"
-            tools:ignore="NestedWeights">
-
-            <ImageView
-                android:id="@+id/pinball_bg"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitXY" />
-
-            <ImageView
-                android:id="@+id/pinball_icon"
-                android:layout_width="@dimen/game_item_icon_w1"
-                android:layout_height="@dimen/game_item_icon_h1"
-                android:layout_alignBottom="@+id/pinball_bg"
-                android:layout_marginStart="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginBottom="5dp"
-                android:scaleType="fitXY" />
-
-            <TextView
-                android:id="@+id/pinball_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/pinball_icon"
-                android:layout_alignRight="@+id/pinball_icon"
-                android:layout_marginTop="160dp"
-                android:layout_marginEnd="-100dp"
-                android:layout_marginRight="-100dp"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignEnd="@+id/pinball_icon"
-                android:layout_alignRight="@+id/pinball_icon"
-                android:layout_marginTop="180dp"
-                android:layout_marginEnd="-20dp"
-                android:layout_marginRight="-20dp"
-                android:background="@drawable/like" />
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignEnd="@+id/pinball_icon"
-                android:layout_alignRight="@+id/pinball_icon"
-                android:layout_marginTop="200dp"
-                android:layout_marginEnd="-20dp"
-                android:layout_marginRight="-20dp"
-                android:background="@drawable/power" />
-
-            <TextView
-                android:id="@+id/pinball_like"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/pinball_icon"
-                android:layout_alignRight="@+id/pinball_icon"
-                android:layout_marginTop="180dp"
-                android:layout_marginEnd="-70dp"
-                android:layout_marginRight="-70dp"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/pinball_download"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/pinball_icon"
-                android:layout_alignRight="@+id/pinball_icon"
-                android:layout_marginTop="200dp"
-                android:layout_marginEnd="-70dp"
-                android:layout_marginRight="-70dp"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.8"
-            android:orientation="vertical"
-            android:weightSum="2">
-
-            <RelativeLayout
-                android:id="@+id/pingus_item"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                tools:ignore="NestedWeights">
-
-                <ImageView
-                    android:id="@+id/pingus_bg"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitXY" />
-
-                <ImageView
-                    android:id="@+id/pingus_icon"
-                    android:layout_width="@dimen/game_item_icon_w2"
-                    android:layout_height="@dimen/game_item_icon_h2"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="40dp"
-                    android:scaleType="fitXY" />
-
-                <TextView
-                    android:id="@+id/pingus_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/pingus_icon"
-                    android:layout_alignRight="@+id/pingus_icon"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginEnd="-40dp"
-                    android:layout_marginRight="-40dp"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/pingus_like"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/pingus_icon"
-                    android:layout_alignRight="@+id/pingus_icon"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginEnd="-70dp"
-                    android:layout_marginRight="-70dp"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/pingus_download"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/pingus_icon"
-                    android:layout_alignRight="@+id/pingus_icon"
-                    android:layout_marginTop="70dp"
-                    android:layout_marginEnd="-70dp"
-                    android:layout_marginRight="-70dp"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_alignEnd="@+id/pingus_icon"
-                    android:layout_alignRight="@+id/pingus_icon"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginEnd="-20dp"
-                    android:layout_marginRight="-20dp"
-                    android:background="@drawable/like" />
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_alignEnd="@+id/pingus_icon"
-                    android:layout_alignRight="@+id/pingus_icon"
-                    android:layout_marginTop="70dp"
-                    android:layout_marginEnd="-20dp"
-                    android:layout_marginRight="-20dp"
-                    android:background="@drawable/power" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/express_item"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
-
-
-                <ImageView
-                    android:id="@+id/express_bg"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitXY" />
-
-                <ImageView
-                    android:id="@+id/express_icon"
-                    android:layout_width="@dimen/game_item_icon_w2"
-                    android:layout_height="@dimen/game_item_icon_h2"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="40dp"
-                    android:scaleType="fitXY" />
-
-                <TextView
-                    android:id="@+id/express_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/express_icon"
-                    android:layout_alignRight="@+id/express_icon"
-                    android:layout_marginEnd="-60dp"
-                    android:layout_marginRight="-60dp"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_alignEnd="@+id/express_icon"
-                    android:layout_alignRight="@+id/express_icon"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginEnd="-20dp"
-                    android:layout_marginRight="-20dp"
-                    android:background="@drawable/like" />
-
-                <TextView
-                    android:id="@+id/express_like"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/express_icon"
-                    android:layout_alignRight="@+id/express_icon"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginEnd="-70dp"
-                    android:layout_marginRight="-70dp"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/express_download"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/express_icon"
-                    android:layout_alignRight="@+id/express_icon"
-                    android:layout_marginTop="70dp"
-                    android:layout_marginEnd="-70dp"
-                    android:layout_marginRight="-70dp"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_alignEnd="@+id/express_icon"
-                    android:layout_alignRight="@+id/express_icon"
-                    android:layout_marginTop="70dp"
-                    android:layout_marginEnd="-20dp"
-                    android:layout_marginRight="-20dp"
-                    android:background="@drawable/power" />
-
-            </RelativeLayout>
-        </LinearLayout>
+            android:scaleType="fitXY" />
 
     </LinearLayout>
 
-    <ListView
+    <com.yt.gamebox.Widgets.HorizontalRecyclerView
         android:id="@+id/game_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
-        android:layout_weight="1" />
+        android:layout_weight="1.8" />
 
 </LinearLayout>

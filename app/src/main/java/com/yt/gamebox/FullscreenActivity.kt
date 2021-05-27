@@ -15,12 +15,10 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.yt.gamebox.Adapters.FragmentAdapter
-import com.yt.gamebox.Fragments.CashFragment
-import com.yt.gamebox.Fragments.GameFragment
-import com.yt.gamebox.Fragments.PrizeFragment
-import com.yt.gamebox.Fragments.WalletFragment
+import com.yt.gamebox.Fragments.*
 import com.yt.gamebox.Services.*
 import com.yt.gamebox.Utils.*
+import com.yt.gamebox.Widgets.NoScrollViewPager
 import com.yt.gamebox.data.MemoryEvent
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -39,12 +37,14 @@ class FullscreenActivity : AppCompatActivity() {
 
     private lateinit var naviBar: LinearLayout
     private lateinit var itemGame: ImageView
+    private lateinit var itemCheck: ImageView
     private lateinit var itemCash: ImageView
     private lateinit var itemPrize: ImageView
     private lateinit var itemWallet: ImageView
 
-    private lateinit var viewPager: ViewPager
+    private lateinit var viewPager: NoScrollViewPager
     private lateinit var gameFragment: GameFragment
+    private lateinit var checkFragment: CheckFragment
     private lateinit var cashFragment: CashFragment
     private lateinit var prizeFragment: PrizeFragment
     private lateinit var walletFragment: WalletFragment
@@ -141,41 +141,53 @@ class FullscreenActivity : AppCompatActivity() {
         itemGame = findViewById(R.id.item_game)
         GlideUtil.displayImgByResId(context = mContext, R.drawable.game_sel, itemGame)
         itemGame.setOnClickListener {
-            viewPager.setCurrentItem(0, true)
-        }
-        itemCash = findViewById(R.id.item_cash)
-        GlideUtil.displayImgByResId(context = mContext, R.drawable.cash, itemCash)
-        itemCash.setOnClickListener {
-            viewPager.setCurrentItem(1, true)
-        }
-        itemPrize = findViewById(R.id.item_prize)
-        GlideUtil.displayImgByResId(context = mContext, R.drawable.prize, itemPrize)
-        itemPrize.setOnClickListener {
             viewPager.setCurrentItem(2, true)
         }
+
+        itemCheck = findViewById(R.id.item_check)
+        GlideUtil.displayImgByResId(context = mContext, R.drawable.checkin, itemCheck)
+        itemCheck.setOnClickListener {
+            viewPager.setCurrentItem(3, true)
+        }
+
         itemWallet = findViewById(R.id.item_wallet)
         GlideUtil.displayImgByResId(context = mContext, R.drawable.wallet, itemWallet)
         itemWallet.setOnClickListener {
-            viewPager.setCurrentItem(3, true)
+            viewPager.setCurrentItem(4, true)
         }
+
+        itemCash = findViewById(R.id.item_cash)
+        GlideUtil.displayImgByResId(context = mContext, R.drawable.cash, itemCash)
+        itemCash.setOnClickListener {
+            viewPager.setCurrentItem(0, true)
+        }
+
+        itemPrize = findViewById(R.id.item_prize)
+        GlideUtil.displayImgByResId(context = mContext, R.drawable.prize, itemPrize)
+        itemPrize.setOnClickListener {
+            viewPager.setCurrentItem(1, true)
+        }
+
         itemGame.isSelected = true
 
         gameFragment = GameFragment(this)
+        checkFragment = CheckFragment(this)
         cashFragment = CashFragment()
         prizeFragment = PrizeFragment()
         walletFragment = WalletFragment(this)
 
         fragList = ArrayList()
-        fragList.add(gameFragment)
         fragList.add(cashFragment)
         fragList.add(prizeFragment)
+        fragList.add(gameFragment)
+        fragList.add(checkFragment)
         fragList.add(walletFragment)
         fragmentAdapter = FragmentAdapter(supportFragmentManager, fragList)
 
         viewPager = findViewById(R.id.viewpager)
-        viewPager.offscreenPageLimit = 4
+        viewPager.offscreenPageLimit = fragList.size
         viewPager.adapter = fragmentAdapter
-        viewPager.currentItem = 0
+        viewPager.currentItem = 2
         viewPager.setOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(
                 position: Int,
@@ -200,45 +212,40 @@ class FullscreenActivity : AppCompatActivity() {
 
     private fun changeSelector(position: Int) {
         when (position) {
-            0 -> {
-//                itemGame.isSelected = true
-//                itemCash.isSelected = false
-//                itemPrize.isSelected = false
-//                itemWallet.isSelected = false
+            2 -> {
                 GlideUtil.displayImgByResId(context = mContext, R.drawable.game_sel, itemGame)
+                GlideUtil.displayImgByResId(context = mContext, R.drawable.checkin, itemCheck)
                 GlideUtil.displayImgByResId(context = mContext, R.drawable.cash, itemCash)
                 GlideUtil.displayImgByResId(context = mContext, R.drawable.prize, itemPrize)
                 GlideUtil.displayImgByResId(context = mContext, R.drawable.wallet, itemWallet)
             }
-            1 -> {
-//                itemGame.isSelected = false
-//                itemCash.isSelected = true
-//                itemPrize.isSelected = false
-//                itemWallet.isSelected = false
+            3 -> {
                 GlideUtil.displayImgByResId(context = mContext, R.drawable.game, itemGame)
+                GlideUtil.displayImgByResId(context = mContext, R.drawable.checkin_sel, itemCheck)
+                GlideUtil.displayImgByResId(context = mContext, R.drawable.cash, itemCash)
+                GlideUtil.displayImgByResId(context = mContext, R.drawable.prize, itemPrize)
+                GlideUtil.displayImgByResId(context = mContext, R.drawable.wallet, itemWallet)
+            }
+            4 -> {
+                GlideUtil.displayImgByResId(context = mContext, R.drawable.game, itemGame)
+                GlideUtil.displayImgByResId(context = mContext, R.drawable.checkin, itemCheck)
+                GlideUtil.displayImgByResId(context = mContext, R.drawable.cash, itemCash)
+                GlideUtil.displayImgByResId(context = mContext, R.drawable.prize, itemPrize)
+                GlideUtil.displayImgByResId(context = mContext, R.drawable.wallet_sel, itemWallet)
+            }
+            0 -> {
+                GlideUtil.displayImgByResId(context = mContext, R.drawable.game, itemGame)
+                GlideUtil.displayImgByResId(context = mContext, R.drawable.checkin, itemCheck)
                 GlideUtil.displayImgByResId(context = mContext, R.drawable.cash_sel, itemCash)
                 GlideUtil.displayImgByResId(context = mContext, R.drawable.prize, itemPrize)
                 GlideUtil.displayImgByResId(context = mContext, R.drawable.wallet, itemWallet)
             }
-            2 -> {
-//                itemGame.isSelected = false
-//                itemCash.isSelected = false
-//                itemPrize.isSelected = true
-//                itemWallet.isSelected = false
+            1 -> {
                 GlideUtil.displayImgByResId(context = mContext, R.drawable.game, itemGame)
+                GlideUtil.displayImgByResId(context = mContext, R.drawable.checkin, itemCheck)
                 GlideUtil.displayImgByResId(context = mContext, R.drawable.cash, itemCash)
                 GlideUtil.displayImgByResId(context = mContext, R.drawable.prize_sel, itemPrize)
                 GlideUtil.displayImgByResId(context = mContext, R.drawable.wallet, itemWallet)
-            }
-            3 -> {
-//                itemGame.isSelected = false
-//                itemCash.isSelected = false
-//                itemPrize.isSelected = false
-//                itemWallet.isSelected = true
-                GlideUtil.displayImgByResId(context = mContext, R.drawable.game, itemGame)
-                GlideUtil.displayImgByResId(context = mContext, R.drawable.cash, itemCash)
-                GlideUtil.displayImgByResId(context = mContext, R.drawable.prize, itemPrize)
-                GlideUtil.displayImgByResId(context = mContext, R.drawable.wallet_sel, itemWallet)
             }
         }
     }
