@@ -63,6 +63,7 @@
                         android:id="@+id/user_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:singleLine="true"
                         android:text="游客23455543"
                         android:textColor="@color/white"
                         android:textSize="24sp" />
@@ -71,6 +72,7 @@
                         android:id="@+id/user_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:singleLine="true"
                         android:text="ID:533344444"
                         android:textColor="@color/white"
                         android:textSize="24sp" />
@@ -89,8 +91,8 @@
                     android:id="@+id/title_game"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
                     android:text="@string/wallet"
-                    android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="48sp" />
 
@@ -135,6 +137,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:singleLine="true"
                     android:text="23455543"
                     android:textColor="@color/colorBrown"
                     android:textSize="36sp" />
@@ -161,6 +164,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:singleLine="true"
                     android:text="650.56"
                     android:textColor="@color/colorBrown"
                     android:textSize="36sp" />

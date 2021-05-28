@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="120dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginBottom="5dp"
     android:background="@drawable/game_bg"
     android:orientation="vertical">
 
@@ -13,75 +17,79 @@
         tools:ignore="MissingConstraints">
 
         <ImageView
-            android:scaleType="fitXY"
             android:id="@+id/game_item_bg"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:scaleType="fitXY" />
 
         <ImageView
-            android:scaleType="fitXY"
             android:id="@+id/game_item_icon"
             android:layout_width="@dimen/item_game_icon_size"
             android:layout_height="@dimen/item_game_icon_size"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="25dp"
+            android:scaleType="fitXY" />
 
         <TextView
             android:id="@+id/game_item_title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/game_item_icon"
-            android:layout_alignRight="@+id/game_item_icon"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="-110dp"
-            android:layout_marginRight="-110dp"
-            android:textColor="@color/white"
-            android:textSize="24sp" />
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="2dp"
+            android:gravity="center_horizontal"
+            android:text="南极拯救小鹅鹅"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/icon_game_like"
+            android:layout_width="@dimen/game_like_size"
+            android:layout_height="@dimen/game_like_size"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="40dp"
+            android:layout_toEndOf="@+id/game_item_icon"
+            android:layout_toRightOf="@+id/game_item_icon"
+            android:background="@drawable/like" />
+
+        <ImageView
+            android:id="@+id/icon_game_power"
+            android:layout_width="@dimen/game_power_size"
+            android:layout_height="@dimen/game_power_size"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="70dp"
+            android:layout_toEndOf="@+id/game_item_icon"
+            android:layout_toRightOf="@+id/game_item_icon"
+            android:background="@drawable/power" />
 
         <TextView
             android:id="@+id/game_item_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/game_item_icon"
-            android:layout_alignRight="@+id/game_item_icon"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="-100dp"
-            android:layout_marginRight="-100dp"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="40dp"
+            android:layout_toEndOf="@+id/icon_game_like"
+            android:layout_toRightOf="@+id/icon_game_like"
+            android:text="999万"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/game_item_power"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/game_item_icon"
-            android:layout_alignRight="@+id/game_item_icon"
-            android:layout_marginTop="80dp"
-            android:layout_marginEnd="-100dp"
-            android:layout_marginRight="-100dp"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_alignEnd="@+id/game_item_icon"
-            android:layout_alignRight="@+id/game_item_icon"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="-40dp"
-            android:layout_marginRight="-40dp"
-            android:background="@drawable/like" />
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_alignEnd="@+id/game_item_icon"
-            android:layout_alignRight="@+id/game_item_icon"
-            android:layout_marginTop="80dp"
-            android:layout_marginEnd="-40dp"
-            android:layout_marginRight="-40dp"
-            android:background="@drawable/power" />
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="70dp"
+            android:layout_toEndOf="@+id/icon_game_power"
+            android:layout_toRightOf="@+id/icon_game_power"
+            android:text="888万"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
 
 
     </RelativeLayout>

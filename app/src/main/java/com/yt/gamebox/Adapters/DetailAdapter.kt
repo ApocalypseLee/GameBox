@@ -68,10 +68,10 @@ class DetailAdapter<T>(
             GlideUtil.displayImgByUri(mContext, data.gameIconUrl, gameIcon)
 
         val gameBG = holder.getView<ImageView>(R.id.game_item_bg)
-        if (data.gameBGUrl.isEmpty())
-            GlideUtil.displayImgByResId(mContext, data.gameBGResID, gameBG)
-        else
-            GlideUtil.displayImgByUri(mContext, data.gameBGUrl, gameBG)
+//        if (data.gameBGUrl.isEmpty())
+//            GlideUtil.displayImgByResId(mContext, data.gameBGResID, gameBG)
+//        else
+//            GlideUtil.displayImgByUri(mContext, data.gameBGUrl, gameBG)
 
         val gameTitle = holder.getView<TextView>(R.id.game_item_title)
         gameTitle.text = data.gameName
