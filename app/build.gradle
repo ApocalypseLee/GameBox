@@ -4,7 +4,6 @@ plugins {
     id 'kotlin-android-extensions'
 }
 android {
-    aaptOptions.cruncherEnabled = false;
     dexOptions { javaMaxHeapSize "4g" }
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
